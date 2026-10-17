@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Little Something for Bubbly 💗</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,serif;color:#633747;background:linear-gradient(135deg,#ffe3ed,#fff4e7);min-height:100vh}
+.panel{width:min(720px,94%);margin:28px auto;padding:30px 22px;text-align:center;background:#fffaf8;border:1px solid #f0cbd6;border-radius:26px;box-shadow:0 12px 40px #9c4b6320}
+.hidden{display:none!important}
+.eyebrow{font:11px Arial,sans-serif;letter-spacing:3px;text-transform:uppercase;color:#c85f78}
+h1{font-size:clamp(30px,7vw,48px);font-weight:normal}
+p{line-height:1.8;color:#876574}
+.heart{font-size:48px;animation:pulse 1.5s infinite}
+button{cursor:pointer;border:0;border-radius:25px;padding:13px 21px;margin:5px;font-size:15px;transition:.2s}
+button:hover{transform:translateY(-3px)}
+.primary{background:#c85f78;color:white}
+.secondary,.back{background:#f7e5eb;color:#8e334e}
+input{max-width:100%}
+.keypad{display:grid;grid-template-columns:repeat(3,70px);justify-content:center;gap:9px;margin:20px auto}
+.keypad button{margin:0;background:#fff0f5;border:1px solid #edc4d2;color:#8e334e;font-size:22px;height:58px}
+.keypad .action{font-size:13px}
+.error{min-height:24px;color:#c03955;font:13px Arial,sans-serif}
+.gifts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:28px 0}
+.gift{height:145px;background:#fff0f5;border:1px solid #efc6d3;border-radius:20px;width:100%}
+.gift span{display:block;font-size:60px;color:#c85f78;animation:pulse 1.7s infinite}
+.bubbly{color:#a43f60;text-shadow:2px 3px #f8cbd9;animation:bob 2s infinite}
+@keyframes pulse{50%{transform:scale(1.1)}}
+@keyframes bob{50%{transform:translateY(-5px) rotate(1deg)}}
+.reveal{animation:reveal .65s ease}
+@keyframes reveal{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:none}}
+.uploads{text-align:left;padding:16px;border:1px dashed #d9a8b8;border-radius:14px}
+.uploads label{display:block;margin:12px 0}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-top:15px}
+.gallery img{width:100%;height:160px;object-fit:cover;border-radius:12px}
+audio{width:100%;margin-top:15px}
+.letter{background:#f5e6c9;color:#55402f;border:1px solid #d5bc8e;padding:24px;text-align:left;line-height:1.9;white-space:pre-line}
+.letter p{color:#55402f}
+@media(max-width:520px){.gifts{gap:5px}.gift{height:105px;padding:5px}.gift span{font-size:43px}.panel{padding:26px 15px}}
+</style>
+</head>
+<body>
+
+<section class="panel" id="welcome">
+<div class="eyebrow">A little page made with love</div>
+<div class="heart">♡</div>
+<h1>Are you Excited to open this?</h1>
+<p>I made something special just for you, with all my love. ♡</p>
+<button class="primary" onclick="show('passcode')">Yes, I'm excited 💗</button>
+<button class="secondary" onclick="show('sad')">No</button>
+</section>
+
+<section class="panel hidden" id="sad">
+<div class="heart">🥺</div><h1>Oh no…</h1>
+<p>Maybe you'll give this little surprise another chance?</p>
+<button class="primary" onclick="show('welcome')">Okay, let's try again 💞</button>
+</section>
+
+<section class="panel hidden" id="passcode">
+<div class="eyebrow">Just a little secret</div>
+<div class="heart">🔐</div>
+<h1>Our secret passcode</h1>
+<p>Enter our special numbers to unlock your surprises.</p>
+<form onsubmit="unlock(event)">
+<input id="code" type="password" placeholder="♡  •  •  •  •" readonly aria-label="Passcode" style="text-align:center;width:210px;padding:13px;border:1px solid #edc4d2;border-radius:12px;font-size:23px;letter-spacing:8px">
+<div class="keypad">
+<button type="button" onclick="press('1')">1</button>
+<button type="button" onclick="press('2')">2</button>
+<button type="button" onclick="press('3')">3</button>
+<button type="button" onclick="press('4')">4</button>
+<button type="button" onclick="press('5')">5</button>
+<button type="button" onclick="press('6')">6</button>
+<button type="button" onclick="press('7')">7</button>
+<button type="button" onclick="press('8')">8</button>
+<button type="button" onclick="press('9')">9</button>
+<button type="button" class="action" onclick="clearCode()">Clear</button>
+<button type="button" onclick="press('0')">0</button>
+<button type="button" class="action" onclick="backspace()">⌫</button>
+</div>
+<div class="error" id="error"></div>
+<button class="primary" type="submit">Unlock my gifts ♡</button>
+</form>
+<button class="back" onclick="show('welcome')">Go back</button>
+</section>
+
+<section class="panel hidden" id="menu">
+<div class="eyebrow">Three little surprises</div>
+<h1 class="bubbly">Choose a gift, Bubbly 💗</h1>
+<p>Choose a heart and discover your surprise. ♡</p>
+<div class="gifts">
+<button class="gift" aria-label="First surprise" onclick="show('memories')"><span>♡</span></button>
+<button class="gift" aria-label="Second surprise" onclick="show('letter')"><span>♡</span></button>
+<button class="gift" aria-label="Third surprise" onclick="show('sorry')"><span>♡</span></button>
+</div>
+</section>
+
+<section class="panel hidden" id="memories">
+<div class="eyebrow">Little moments, forever memories</div>
+<h1>Our memories ♡</h1>
+<p>Our favorite moments, captured forever. Add your photos and our song below.</p>
+<div class="uploads">
+<label for="photos">Choose our photos</label>
+<input id="photos" type="file" accept="image/*" multiple onchange="loadPhotos(event)">
+<div id="gallery" class="gallery"></div>
+<label for="song">Choose our song</label>
+<input id="song" type="file" accept="audio/*" onchange="loadSong(event)">
+<audio id="player" class="hidden" controls></audio>
+</div>
+<button class="back" onclick="show('menu')">← Back to gifts</button>
+</section>
+
+<section class="panel hidden" id="letter">
+<div class="eyebrow">Sealed with love</div>
+<h1>A letter for you 💌</h1>
+<article class="letter">
+<h2 style="text-align:center;font-weight:normal">My dearest,</h2>
+<p>This is where my heart speaks to you.
+
+You are someone truly special to me. Every little memory, every smile, and every moment we share means more than words can explain.
+
+I hope this little surprise reminds you how much you mean to me.
+
+With all my heart,
+Your person ♡</p>
+</article>
+<button class="back" onclick="show('menu')">← Back to gifts</button>
+</section>
+
+<section class="panel hidden" id="sorry">
+<div class="eyebrow">From the bottom of my heart</div>
+<div class="heart">🤍</div>
+<h1>I'm truly sorry</h1>
+<article class="letter">
+<h2 style="text-align:center;font-weight:normal">Please forgive me</h2>
+<p>I'm sorry for the mistakes I've made and for the times I hurt you. I know that saying sorry cannot undo what happened, but I want you to know that your feelings matter to me.
+
+You mean a lot to me. I want to learn from my mistakes, listen better, and show through my actions that I'm trying to do better.
+
+I won't rush your feelings. I sincerely hope that, when you're ready, you can forgive me.
+
+With love and a genuinely sorry heart. ♡</p>
+</article>
+<button class="back" onclick="show('menu')">← Back to gifts</button>
+</section>
+
+<script>
+function show(id){
+ document.querySelectorAll('.panel').forEach(p=>p.classList.add('hidden'));
+ const panel=document.getElementById(id);
+ panel.classList.remove('hidden');
+ panel.classList.remove('reveal');
+ void panel.offsetWidth;
+ panel.classList.add('reveal');
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+function press(n){
+ const field=document.getElementById('code');
+ if(field.value.length<4)field.value+=n;
+ document.getElementById('error').textContent='';
+}
+function clearCode(){
+ document.getElementById('code').value='';
+ document.getElementById('error').textContent='';
+}
+function backspace(){
+ const field=document.getElementById('code');
+ field.value=field.value.slice(0,-1);
+ document.getElementById('error').textContent='';
+}
+function unlock(e){
+ e.preventDefault();
+ const field=document.getElementById('code');
+ if(field.value==='2605'){
+  clearCode();
+  show('menu');
+ }else{
+  document.getElementById('error').textContent='Not quite right, Bubbly. Try again 💗';
+  clearCode();
+ }
+}
+function loadPhotos(e){
+ const gallery=document.getElementById('gallery');
+ gallery.innerHTML='';
+ Array.from(e.target.files).forEach(file=>{
+  const img=document.createElement('img');
+  img.alt=file.name;
+  img.src=URL.createObjectURL(file);
+  gallery.appendChild(img);
+ });
+}
+function loadSong(e){
+ const player=document.getElementById('player');
+ if(e.target.files[0]){
+  player.src=URL.createObjectURL(e.target.files[0]);
+  player.classList.remove('hidden');
+ }
+}
+</script>
+</body>
+</html>
