@@ -219,11 +219,7 @@ Sasiluuu ❤️. ♡</p>
 </section>
 
 <script>
-function show(id)if(id==='memories'){
-  const player=document.getElementById('player');
-  player.load();
-  player.play().catch(()=>{});
-}{
+function show(id){
  document.querySelectorAll('.panel').forEach(p=>p.classList.add('hidden'));
  const panel=document.getElementById(id);
  panel.classList.remove('hidden');
