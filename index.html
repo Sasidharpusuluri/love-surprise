@@ -96,18 +96,32 @@ audio{width:100%;margin-top:15px}
 </div>
 </section>
 
+
 <section class="panel hidden" id="memories">
-<div class="eyebrow">Little moments, forever memories</div>
-<h1>Our memories ♡</h1>
-<p>Our favorite moments, captured forever. Add your photos and our song below.</p>
-<div class="uploads">
-<label for="photos">Choose our photos</label>
-<input id="photos" type="file" accept="image/*" multiple onchange="loadPhotos(event)">
-<div id="gallery" class="gallery"></div>
-<label for="song">Choose our song</label>
-<input id="song" type="file" accept="audio/*" onchange="loadSong(event)">
-<audio id="player" class="hidden" controls></audio>
-</div>
+  <div class="eyebrow">little moments, forever memories</div>
+  <h1>Our Memories 📷💗</h1>
+  <p>Every picture holds a little piece of our story. Forever us. ♡</p>
+
+  <div class="gallery">
+    <img src="memory1.jpg" alt="Our memory 1">
+    <img src="memory2.jpg" alt="Our memory 2">
+    <img src="memory3.jpg" alt="Our memory 3">
+  </div>
+
+  <div class="uploads">
+    <h2>🎵 Our Special Song</h2>
+    <p>A little melody that reminds me of you. ♡</p>
+    <audio controls preload="metadata">
+      <source src="oursong.mp3" type="audio/mpeg">
+      Your browser does not support audio playback.
+    </audio>
+  </div>
+
+  <button class="back" onclick="show('menu')">
+    ← Back to gifts
+  </button>
+</section>
+
 <button class="back" onclick="show('menu')">← Back to gifts</button>
 </section>
 
