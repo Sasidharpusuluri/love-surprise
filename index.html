@@ -51,6 +51,13 @@ input{max-width:100%}
   transform: rotate(1.5deg);
 }
 
+.gallery img:nth-child(-n+2) {
+  height: 250px;
+  border: 10px solid #fffaf6;
+  box-shadow: 0 8px 22px #c85f7840,
+    0 0 0 2px #e6a8ba,
+    0 0 0 6px #fff0f4;
+}
 .gallery img:hover {
   transform: rotate(0) scale(1.035);
   box-shadow: 0 12px 24px #8e334e35, 0 0 0 2px #e6a8ba;
@@ -246,15 +253,21 @@ function unlock(e){
   clearCode();
  }
 }
-function loadPhotos(e){
- const gallery=document.getElementById('gallery');
- gallery.innerHTML='';
- Array.from(e.target.files).forEach(file=>{
-  const img=document.createElement('img');
-  img.alt=file.name;
-  img.src=URL.createObjectURL(file);
-  gallery.appendChild(img);
- });
+
+function loadPhotos(event) {
+  const gallery = document.getElementById('gallery');
+
+  Array.from(event.target.files).forEach(file => {
+    if (!file.type.startsWith('image/')) return;
+
+    const img = document.createElement('img');
+    img.alt = file.name;
+    img.src = URL.createObjectURL(file);
+    gallery.appendChild(img);
+  });
+
+  event.target.value = '';
+}
 }
 function loadSong(e){
  const player=document.getElementById('player');
