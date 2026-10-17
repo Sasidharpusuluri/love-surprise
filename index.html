@@ -76,7 +76,9 @@ audio{width:100%;margin-top:15px}
 <div class="heart">♡</div>
 <h1>Are you Excited to open this?</h1>
 <p>I made something special just for you, with all my love. ♡</p>
-<button class="primary" onclick="show('passcode')">Yes, I'm excited 💗</button>
+<button class="primary" id="yesButton" type="button">
+  Yes, I'm excited 💗
+</button>
 <button class="secondary" onclick="show('sad')">No</button>
 </section>
 
@@ -276,6 +278,11 @@ function loadSong(e){
   player.classList.remove('hidden');
  }
 }
+  
+document.getElementById('yesButton').addEventListener('click', function() {
+    show('passcode');
+});
+
 </script>
 </body>
 </html>
