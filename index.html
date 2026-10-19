@@ -109,8 +109,15 @@ audio{width:100%;margin-top:15px}
 <button type="button" class="action" onclick="backspace()">⌫</button>
 </div>
 <div class="error" id="error"></div>
+  <div id="wrongCode" class="hidden" role="alert">
+  <div class="heart">🥺💗</div>
+  <h2>Sorry, Bubblu… try again ❤️</h2>
+  <p>Or close your eyes… Sasi will come to you and tell you the secret code. 💕</p>
+  <div class="heart">🙈💌</div>
+</div>
 <button class="primary" type="submit">Unlock my gifts ♡</button>
 </form>
+  
 <button class="back" onclick="show('welcome')">Go back</button>
 </section>
 
@@ -238,18 +245,28 @@ function backspace(){
  field.value=field.value.slice(0,-1);
  document.getElementById('error').textContent='';
 }
-function unlock(e){
- e.preventDefault();
- const field=document.getElementById('code');
- if(field.value==='2605'){
-  clearCode();
-  show('menu');
- }else{
-  document.getElementById('error').textContent='Not quite right, Bubbly. Try again 💗';
-  clearCode();
- }
-}
 
+function unlock(event) {
+  event.preventDefault();
+  const code = document.getElementById('code').value;
+  const wrong = document.getElementById('wrongCode');
+
+  if (code === '0526') {
+    document.getElementById('error').textContent = '';
+    if (wrong) wrong.classList.add('hidden');
+    clearCode();
+    show('menu');
+  } else {
+    document.getElementById('error').textContent = '';
+    if (wrong) {
+      wrong.classList.remove('hidden');
+    } else {
+      document.getElementById('error').textContent =
+        '🥺 Sorry, Bubblu… try again ❤️ Or close your eyes… Sasi will come to you and tell you the secret code. 💕';
+    }
+    clearCode();
+  }
+}
 function loadPhotos(event) {
   const gallery = document.getElementById('gallery');
 
