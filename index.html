@@ -108,7 +108,8 @@ audio{width:100%;margin-top:15px}
 
 </style>
 </head>
-  
+<body>
+
 <section class="panel shooting-game">
   <h2>Happy Dussehra, Bubbly! 🪔💖</h2>
   <p>A special gift made with love. Shoot the heart to unlock your surprise!</p>
@@ -128,8 +129,6 @@ audio{width:100%;margin-top:15px}
     <img id="surprise-photo" alt="A special surprise for Bubbly">
   </div>
 </section>
-
-<body>
   
 <section class="panel" id="welcome">
 <div class="eyebrow">A little page made with love</div>
@@ -353,12 +352,30 @@ function loadSong(e){
 document.getElementById('yesButton').addEventListener('click', function() {
     show('passcode');
 });
-<script>
-  // Existing functions: show(), unlock(), etc.
 
-  // Your shooting-game click listener goes here.
+document.getElementById('shoot-button').addEventListener('click', function() {
+  const heart = document.getElementById('target-heart');
+  const area = document.getElementById('surprise-photo-area');
+  const message = document.getElementById('game-message');
+  const button = document.getElementById('shoot-button');
 
-  // Your photo-upload listener goes here.
+  heart.classList.add('broken');
+  button.disabled = true;
+  message.textContent = 'Bullseye! Your surprise is unlocked 💗';
+
+  setTimeout(function() {
+    area.style.display = 'block';
+  }, 600);
+});
+
+document.getElementById('photo-choice').addEventListener('change', function(event) {
+  const file = event.target.files[0];
+  if (!file || !file.type.startsWith('image/')) return;
+
+  const photo = document.getElementById('surprise-photo');
+  photo.src = URL.createObjectURL(file);
+  photo.style.display = 'inline-block';
+});
 </script>
 </body>
 </html>
