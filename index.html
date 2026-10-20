@@ -66,8 +66,69 @@ audio{width:100%;margin-top:15px}
 .letter{background:#f5e6c9;color:#55402f;border:1px solid #d5bc8e;padding:24px;text-align:left;line-height:1.9;white-space:pre-line}
 .letter p{color:#55402f}
 @media(max-width:520px){.gifts{gap:5px}.gift{height:105px;padding:5px}.gift span{font-size:43px}.panel{padding:26px 15px}}
+  
+/* Dussehra shooting-heart gift */
+.shooting-game {
+  margin: 20px auto;
+  padding: 20px;
+  background: #fff0f6;
+  border: 2px solid #ff9ac2;
+  border-radius: 18px;
+  color: #a83268;
+  text-align: center;
+}
+.shooting-game button {
+  cursor: pointer;
+  padding: 10px 18px;
+  border: 0;
+  border-radius: 12px;
+  background: #e84393;
+  color: white;
+  font-size: 16px;
+}
+#target-heart {
+  display: inline-block;
+  font-size: 65px;
+  margin: 12px;
+}
+#target-heart.broken {
+  animation: breakHeart .6s forwards;
+}
+@keyframes breakHeart {
+  50% { transform: scale(1.5) rotate(-15deg); }
+  100% { transform: scale(0); opacity: 0; }
+}
+#surprise-photo-area { display: none; margin-top: 18px; }
+#surprise-photo {
+  display: none;
+  max-width: 100%;
+  max-height: 350px;
+  border-radius: 15px;
+}
+
 </style>
 </head>
+  
+<section class="panel shooting-game">
+  <h2>Happy Dussehra, Bubbly! 🪔💖</h2>
+  <p>A special gift made with love. Shoot the heart to unlock your surprise!</p>
+
+  <div>
+    🔫 <span id="target-heart">❤️</span>
+  </div>
+
+  <button id="shoot-button" type="button">🔫 Shoot the heart</button>
+  <p id="game-message">Ready, aim, love! 💕</p>
+
+  <div id="surprise-photo-area">
+    <h3>You unlocked your gift, Bubbly! 💝</h3>
+    <p>Choose your special photo:</p>
+    <input id="photo-choice" type="file" accept="image/*">
+    <br><br>
+    <img id="surprise-photo" alt="A special surprise for Bubbly">
+  </div>
+</section>
+
 <body>
   
 <section class="panel" id="welcome">
@@ -220,6 +281,31 @@ Sasiluuu ❤️. ♡</p>
 </article>
 <button class="back" onclick="show('menu')">← Back to gifts</button>
 </section>
+document.getElementById("shoot-button").addEventListener("click", function () {
+  const heart = document.getElementById("target-heart");
+
+  if (heart.classList.contains("broken")) return;
+
+  heart.classList.add("broken");
+  document.getElementById("game-message").textContent =
+    "Boom! The heart broke into love! 💖";
+
+  this.disabled = true;
+  document.getElementById("surprise-photo-area").style.display = "block";
+});
+
+document.getElementById("photo-choice").addEventListener("change", function (event) {
+  const file = event.target.files[0];
+  if (!file || !file.type.startsWith("image/")) return;
+
+  const reader = new FileReader();
+  reader.onload = function () {
+    const photo = document.getElementById("surprise-photo");
+    photo.src = reader.result;
+    photo.style.display = "block";
+  };
+  reader.readAsDataURL(file);
+});
 
 <script>
 function show(id){
