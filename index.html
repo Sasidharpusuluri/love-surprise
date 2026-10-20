@@ -281,31 +281,6 @@ Sasiluuu ❤️. ♡</p>
 </article>
 <button class="back" onclick="show('menu')">← Back to gifts</button>
 </section>
-document.getElementById("shoot-button").addEventListener("click", function () {
-  const heart = document.getElementById("target-heart");
-
-  if (heart.classList.contains("broken")) return;
-
-  heart.classList.add("broken");
-  document.getElementById("game-message").textContent =
-    "Boom! The heart broke into love! 💖";
-
-  this.disabled = true;
-  document.getElementById("surprise-photo-area").style.display = "block";
-});
-
-document.getElementById("photo-choice").addEventListener("change", function (event) {
-  const file = event.target.files[0];
-  if (!file || !file.type.startsWith("image/")) return;
-
-  const reader = new FileReader();
-  reader.onload = function () {
-    const photo = document.getElementById("surprise-photo");
-    photo.src = reader.result;
-    photo.style.display = "block";
-  };
-  reader.readAsDataURL(file);
-});
 
 <script>
 function show(id){
@@ -378,6 +353,16 @@ function loadSong(e){
 document.getElementById('yesButton').addEventListener('click', function() {
     show('passcode');
 });
+
+<script>
+  // Existing functions: show(), unlock(), etc.
+
+  // Your shooting-game click listener goes here.
+
+  // Your photo-upload listener goes here.
+</script>
+</body>
+</html>
 
 </script>
 </body>
