@@ -66,9 +66,9 @@ audio{width:100%;margin-top:15px}
 .letter{background:#f5e6c9;color:#55402f;border:1px solid #d5bc8e;padding:24px;text-align:left;line-height:1.9;white-space:pre-line}
 .letter p{color:#55402f}
 @media(max-width:520px){.gifts{gap:5px}.gift{height:105px;padding:5px}.gift span{font-size:43px}.panel{padding:26px 15px}}
-  
-</section>
-  
+  </style>
+</head>
+<body>
 <section class="panel" id="welcome">
 <div class="eyebrow">A little page made with love</div>
 <div class="heart">♡</div>
@@ -292,29 +292,6 @@ document.getElementById('yesButton').addEventListener('click', function() {
     show('passcode');
 });
 
-document.getElementById('shoot-button').addEventListener('click', function() {
-  const heart = document.getElementById('target-heart');
-  const area = document.getElementById('surprise-photo-area');
-  const message = document.getElementById('game-message');
-  const button = document.getElementById('shoot-button');
-
-  heart.classList.add('broken');
-  button.disabled = true;
-  message.textContent = 'Bullseye! Your surprise is unlocked 💗';
-
-  setTimeout(function() {
-    area.style.display = 'block';
-  }, 600);
-});
-
-document.getElementById('photo-choice').addEventListener('change', function(event) {
-  const file = event.target.files[0];
-  if (!file || !file.type.startsWith('image/')) return;
-
-  const photo = document.getElementById('surprise-photo');
-  photo.src = URL.createObjectURL(file);
-  photo.style.display = 'inline-block';
-});
 </script>
 </body>
 </html>
